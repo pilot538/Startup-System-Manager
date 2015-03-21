@@ -39,13 +39,16 @@ namespace Startup_Program
 
 
             MenuItem progNameMenuItem = new MenuItem("System Manager v0.1 DEV");
+            MenuItem startHDDLEDMenuItem = new MenuItem("Start HDDLED Program");
             MenuItem quitMenuItem = new MenuItem("Quit");
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.MenuItems.Add(quitMenuItem);
-
+            contextMenu.MenuItems.Add(startHDDLEDMenuItem);
+            contextMenu.MenuItems.Add(progNameMenuItem);
 
             managerNotifyIcon.ContextMenu = contextMenu;
             quitMenuItem.Click += quitMenuItem_Click;
+            startHDDLEDMenuItem.Click += startHDDLEDMenuItem_Click;
 
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
@@ -55,6 +58,8 @@ namespace Startup_Program
 
         }
 
+        
+
         #region Menu Click Methods (NOT DONE)
         /// <summary>
         /// Quits the application when click on from the managment icon
@@ -63,8 +68,22 @@ namespace Startup_Program
         /// <param name="e"></param>
         void quitMenuItem_Click(object sender, EventArgs e)
         {
+            synth.Speak("Hard drive l e d program exiting");
+            synth.Speak("Program exiting");
             managerNotifyIcon.Dispose();
             this.Close();
+        }
+        /// <summary>
+        /// Starts the HDDLED program, which is in HDDLED.cs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void startHDDLEDMenuItem_Click(object sender, EventArgs e)
+        {
+            //Starts the HDDLED form and program
+            new HDDLED();
+            //Announces that the program started successfully
+            synth.SpeakAsync("Hard drive l e d program has started sucessfully");
         }
         #endregion
     }
